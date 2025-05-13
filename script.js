@@ -1,33 +1,18 @@
-function divide(arr, n) {
+function stringChop(str, size) {
+  // If the input string is null, return an empty array
+  if (str === null) return [];
+
   const result = [];
-  let temp = [];
-  let currentSum = 0;
-
-  for (let i = 0; i < arr.length; i++) {
-    if (currentSum + arr[i] <= n) {
-      temp.push(arr[i]);
-      currentSum += arr[i];
-    } else {
-      if (temp.length > 0) result.push(temp);
-      temp = [arr[i]];
-      currentSum = arr[i];
-    }
+  
+  // Loop through the string and slice it into chunks of the specified size
+  for (let i = 0; i < str.length; i += size) {
+    result.push(str.slice(i, i + size));
   }
-
-  if (temp.length > 0) result.push(temp);
-
+  
   return result;
 }
 
-function handleDivide() {
-  const arrayStr = document.getElementById("arrayInput").value;
-  const maxSum = parseInt(document.getElementById("maxSumInput").value);
-  
-  try {
-    const array = arrayStr.split(",").map(num => parseInt(num.trim()));
-    const result = divide(array, maxSum);
-    document.getElementById("output").innerText = Output: ${JSON.stringify(result)};
-  } catch (e) {
-    document.getElementById("output").innerText = "Invalid input.";
-  }
-}
+// Do not change the code below
+const str = prompt("Enter String.");
+const size = parseInt(prompt("Enter Chunk Size."), 10);
+alert(stringChop(str, size));
